@@ -1,5 +1,5 @@
 using System;
-using System.Drawing;
+using System.Drawing; //робота з графікою, розмірами та координатами
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -7,7 +7,6 @@ namespace lab1
 {
     public partial class Form1 : Form
     {
-        // Оголошуємо компонент графіка
         private Chart chart1;
 
         public Form1()
@@ -15,10 +14,10 @@ namespace lab1
             InitializeComponent();
 
             chart1 = new Chart();
-            chart1.Location = new Point(370, 107); 
-            chart1.Size = new Size(450, 400);      
+            chart1.Location = new Point(370, 107);
+            chart1.Size = new Size(450, 400);
 
-            ChartArea area = new ChartArea("DefaultArea");
+            ChartArea area = new ChartArea("DefaultArea"); //створення полотна з осями координат
             chart1.ChartAreas.Add(area);
 
             Series series = new Series("F(x)")
@@ -28,7 +27,6 @@ namespace lab1
             };
             chart1.Series.Add(series);
 
-            // Додаємо створений графік на вікно
             this.Controls.Add(chart1);
         }
 
@@ -62,7 +60,6 @@ namespace lab1
 
                     dataGridView1.Rows.Add(curX.ToString(), curY.ToString());
 
-                    // Фільтрація точок розриву тангенса для адекватного масштабу
                     if (!double.IsNaN(curY) && !double.IsInfinity(curY) && Math.Abs(curY) < 50)
                     {
                         chart1.Series[0].Points.AddXY(curX, curY);
@@ -73,6 +70,30 @@ namespace lab1
             {
                 MessageBox.Show("Помилка: " + ex.Message);
             }
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void одновимірніМасивиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 f2 = new Form2();
+            f2.Show();
+            this.Hide();
+        }
+
+        private void двовимірніМасивиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 f3 = new Form3();
+            f3.Show();
+            this.Hide();
         }
     }
 
